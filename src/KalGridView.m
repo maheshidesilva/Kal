@@ -17,7 +17,10 @@
 #define SLIDE_UP 1
 #define SLIDE_DOWN 2
 
-const CGSize kTileSize = { 46.f, 44.f };
+//const CGSize kTileSize = { 46.f, 44.f };
+//this is for tackle the issue for universal app
+const CGSize kTileiPhone = { 46.f, 44.f };
+const CGSize kTileiPad = { 109.7f, 97.f };
 
 static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
@@ -41,6 +44,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
   // to accomodate all 7 columns. The 7th day's 2px inner stroke
   // will be clipped off the screen, but that's fine because
   // MobileCal does the same thing.
+  CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
   frame.size.width = 7 * kTileSize.width;
   
   if (self = [super initWithFrame:frame]) {
@@ -156,7 +160,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 - (void)swapMonthsAndSlide:(int)direction keepOneRow:(BOOL)keepOneRow
 {
   backMonthView.hidden = NO;
-  
+  CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
   // set initial positions before the slide
   if (direction == SLIDE_UP) {
     backMonthView.top = keepOneRow
