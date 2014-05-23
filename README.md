@@ -21,7 +21,7 @@ In this, table view jumps to the far right corner of the window making it very e
 ![](https://raw.githubusercontent.com/maheshidesilva/KalExt/master/images/ipad_calendar_landscape.png)
 
 3. iPad change orientation
-#1 and #2 are programmed to identify the iPad orientation every time it changes to landscape or portrait so that the table view jumps to the right corner in landscape and comes to the bottom again if in the portrait view.
+1 and 2 are programmed to identify the iPad orientation every time it changes to landscape or portrait so that the table view jumps to the right corner in landscape and comes to the bottom again if in the portrait view.
 
 4. iPhone view
 Although, the above modifications are added, iPhone view is as per normal way.
