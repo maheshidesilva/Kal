@@ -38,7 +38,9 @@ extern const CGSize kTileiPad;
   UIColor *textColor = nil;
   UIImage *markerImage = nil;
   CGContextSelectFont(ctx, [font.fontName cStringUsingEncoding:NSUTF8StringEncoding], fontSize, kCGEncodingMacRoman);
+
   CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
+    
   CGContextTranslateCTM(ctx, 0, kTileSize.height);
   CGContextScaleCTM(ctx, 1, -1);
   
