@@ -11,6 +11,9 @@
 #import "KalPrivate.h"
 
 extern const CGSize kTileSize;
+//extern const CGSize kTileSize;
+extern const CGSize kTileiPhone;
+extern const CGSize kTileiPad;
 
 @implementation KalMonthView
 
@@ -18,6 +21,7 @@ extern const CGSize kTileSize;
 
 - (id)initWithFrame:(CGRect)frame
 {
+  CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
   if ((self = [super initWithFrame:frame])) {
     tileAccessibilityFormatter = [[NSDateFormatter alloc] init];
     [tileAccessibilityFormatter setDateFormat:@"EEEE, MMMM d"];
@@ -57,6 +61,7 @@ extern const CGSize kTileSize;
 
 - (void)drawRect:(CGRect)rect
 {
+  CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
   CGContextRef ctx = UIGraphicsGetCurrentContext();
   CGContextDrawTiledImage(ctx, (CGRect){CGPointZero,kTileSize}, [[UIImage imageNamed:@"Kal.bundle/kal_tile.png"] CGImage]);
 }
@@ -90,6 +95,7 @@ extern const CGSize kTileSize;
 
 - (void)sizeToFit
 {
+  CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
   self.height = 1.f + kTileSize.height * numWeeks;
 }
 
