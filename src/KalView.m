@@ -160,8 +160,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
   NSArray *fullWeekdayNames = [[[[NSDateFormatter alloc] init] autorelease] standaloneWeekdaySymbols];
   NSUInteger firstWeekday = [[NSCalendar currentCalendar] firstWeekday];
   NSUInteger i = firstWeekday - 1;
-  for (CGFloat xOffset = 0.f; xOffset < headerView.width; xOffset += 46.f, i = (i+1)%7) {
-    CGRect weekdayFrame = CGRectMake(xOffset, 30.f, 46.f, kHeaderHeight - 29.f);
+
   CGFloat kHeaderHeight = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kHeaderHeightiPad : kHeaderHeightiPhone;
   CGFloat deductHeight = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? 49.0f : 29.0f;
     
