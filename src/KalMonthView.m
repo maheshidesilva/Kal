@@ -21,6 +21,7 @@ extern const CGSize kTileiPad;
 - (id)initWithFrame:(CGRect)frame
 {
   CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
+    
   if ((self = [super initWithFrame:frame])) {
     tileAccessibilityFormatter = [[NSDateFormatter alloc] init];
     [tileAccessibilityFormatter setDateFormat:@"EEEE, MMMM d"];
