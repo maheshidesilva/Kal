@@ -10,7 +10,6 @@
 #import "KalDate.h"
 #import "KalPrivate.h"
 
-extern const CGSize kTileSize;
 //extern const CGSize kTileSize;
 extern const CGSize kTileiPhone;
 extern const CGSize kTileiPad;
