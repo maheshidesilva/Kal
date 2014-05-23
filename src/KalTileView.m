@@ -7,7 +7,9 @@
 #import "KalDate.h"
 #import "KalPrivate.h"
 
-extern const CGSize kTileSize;
+//extern const CGSize kTileSize;
+extern const CGSize kTileiPhone;
+extern const CGSize kTileiPad;
 
 @implementation KalTileView
 
@@ -37,6 +39,7 @@ extern const CGSize kTileSize;
   UIImage *markerImage = nil;
   CGContextSelectFont(ctx, [font.fontName cStringUsingEncoding:NSUTF8StringEncoding], fontSize, kCGEncodingMacRoman);
       
+  CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
   CGContextTranslateCTM(ctx, 0, kTileSize.height);
   CGContextScaleCTM(ctx, 1, -1);
   
@@ -91,6 +94,7 @@ extern const CGSize kTileSize;
 
 - (void)resetState
 {
+  CGSize kTileSize = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kTileiPad : kTileiPhone ;
   // realign to the grid
   CGRect frame = self.frame;
   frame.origin = origin;
