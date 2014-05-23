@@ -4,7 +4,7 @@ This is an extended version of Kal calendar and is modified to work well in an U
 
 For ex: If Kal calendar is just used in an Universal app, the outcome of the calendar would be some thing similar to below.
 
-![](https://github.com/maheshidesilva/KalExt/blob/master/images/ipad_calendar.png)
+![](https://raw.githubusercontent.com/maheshidesilva/KalExt/master/images/ipad_calendar.png)
 
 A calendar component for the iPhone (the UI is designed to match MobileCal)
 
