@@ -40,6 +40,9 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 @synthesize dataSource, delegate, initialDate, selectedDate;
 
+-(void)sendGridLocation:(CGFloat)bottom{
+    self.gridBottomPoint = bottom;
+}
 - (id)initWithSelectedDate:(NSDate *)date
 {
   if ((self = [super init])) {
@@ -181,6 +184,13 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 - (void)loadView
 {
+    //this is to fix header issue
+    float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (systemVersion >= 7.0)
+    {
+        self.navigationController.navigationBar.translucent=NO;
+    }
+  
   if (!self.title)
     self.title = @"Calendar";
   KalView *kalView = [[[KalView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] delegate:self logic:logic] autorelease];
@@ -191,6 +201,20 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
   [tableView retain];
   [kalView selectDate:[KalDate dateFromNSDate:self.initialDate]];
   [self reloadData];
+}
+
+- (void)viewWillLayoutSubviews{
+    if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad){
+        if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
+        {
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, 1024, 768);
+            tableView.frame = CGRectMake(768, 0, 320, 768);
+        }
+        else{
+            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, 768, 1024);
+            tableView.frame = CGRectMake(0, self.gridBottomPoint, 768, 400);
+        }
+    }
 }
 
 - (void)viewDidUnload
