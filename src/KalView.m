@@ -15,6 +15,9 @@
 @end
 
 static const CGFloat kHeaderHeight = 44.f;
+//static const CGFloat kHeaderHeight = 44.f;
+static const CGFloat kHeaderHeightiPhone = 44.f;
+static const CGFloat kHeaderHeightiPad = 74.f;
 static const CGFloat kMonthLabelHeight = 17.f;
 
 @implementation KalView
@@ -30,6 +33,8 @@ static const CGFloat kMonthLabelHeight = 17.f;
     self.autoresizesSubviews = YES;
     self.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
+    CGFloat kHeaderHeight = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kHeaderHeightiPad : kHeaderHeightiPhone;
+      
     UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, frame.size.width, kHeaderHeight)] autorelease];
     headerView.backgroundColor = [UIColor grayColor];
     [self addSubviewsToHeaderView:headerView];
@@ -72,7 +77,32 @@ static const CGFloat kMonthLabelHeight = 17.f;
   const CGFloat kChangeMonthButtonWidth = 46.0f;
   const CGFloat kChangeMonthButtonHeight = 30.0f;
   const CGFloat kMonthLabelWidth = 200.0f;
-  const CGFloat kHeaderVerticalAdjust = 3.f;
+  //const CGFloat kHeaderVerticalAdjust = 3.f;
+    const CGFloat kHeaderVerticalAdjust = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? 8.f : 3.f;
+    
+    CGFloat fontSize;
+    CGFloat headerSize;
+    CGFloat weekWidth;
+    CGFloat yOffset;
+    CGFloat xOffset;
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        self.left = 20;
+        self.width = 768;
+        headerSize = 24;
+        fontSize = 20;
+        weekWidth = 110;
+        yOffset = 50;
+        xOffset = 30;
+    }
+    else {
+        self.width = 320;
+        headerSize = 18;
+        fontSize = 10;
+        weekWidth = 46;
+        yOffset = 30;
+    }
+
   
   // Header background gradient
   UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Kal.bundle/kal_grid_background.png"]];
@@ -132,6 +162,11 @@ static const CGFloat kMonthLabelHeight = 17.f;
   NSUInteger i = firstWeekday - 1;
   for (CGFloat xOffset = 0.f; xOffset < headerView.width; xOffset += 46.f, i = (i+1)%7) {
     CGRect weekdayFrame = CGRectMake(xOffset, 30.f, 46.f, kHeaderHeight - 29.f);
+  CGFloat kHeaderHeight = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? kHeaderHeightiPad : kHeaderHeightiPhone;
+  CGFloat deductHeight = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? 49.0f : 29.0f;
+    
+  for (CGFloat xOffset = 0.f; xOffset < headerView.width; xOffset += weekWidth, i = (i+1)%7) {
+    CGRect weekdayFrame = CGRectMake(xOffset, yOffset, weekWidth, kHeaderHeight - deductHeight);
     UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
     weekdayLabel.backgroundColor = [UIColor clearColor];
     weekdayLabel.font = [UIFont boldSystemFontOfSize:10.f];
@@ -189,8 +224,23 @@ static const CGFloat kMonthLabelHeight = 17.f;
      */
     CGFloat gridBottom = gridView.top + gridView.height;
     CGRect frame = tableView.frame;
-    frame.origin.y = gridBottom;
-    frame.size.height = tableView.superview.height - gridBottom;
+    self.gridBottomPoint = gridBottom;
+    [delegate sendGridLocation:gridBottom];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])){
+            frame.size.height = 768;
+            frame.origin.y = 0;
+            frame.origin.x = gridView.width;
+        }else{
+            frame.origin.y = gridBottom;
+            frame.size.height = tableView.superview.height - gridBottom;
+        }
+    }else{
+        frame.origin.y = gridBottom;
+        frame.size.height = tableView.superview.height - gridBottom;
+    }
+
+    
     tableView.frame = frame;
     shadowView.top = gridBottom;
     
