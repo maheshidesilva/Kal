@@ -46,7 +46,7 @@
   id<KalViewDelegate> delegate;
   KalLogic *logic;
 }
-
+@property (nonatomic, assign) CGFloat gridBottomPoint;
 @property (nonatomic, assign) id<KalViewDelegate> delegate;
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, readonly) KalDate *selectedDate;
@@ -74,5 +74,5 @@
 - (void)showPreviousMonth;
 - (void)showFollowingMonth;
 - (void)didSelectDate:(KalDate *)date;
-
+-(void)sendGridLocation:(CGFloat)bottom;
 @end
