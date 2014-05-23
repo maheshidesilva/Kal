@@ -14,7 +14,6 @@
 - (void)setHeaderTitleText:(NSString *)text;
 @end
 
-static const CGFloat kHeaderHeight = 44.f;
 //static const CGFloat kHeaderHeight = 44.f;
 static const CGFloat kHeaderHeightiPhone = 44.f;
 static const CGFloat kHeaderHeightiPad = 74.f;
